@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WebServicesProject</string>
+    <string name="info_title_text">Enter a Id between 1 to 10 to get post details</string>
+    <string name="input_hint_text">Enter between 1 to 10</string>
+    <string name="get_details_btn_text">Get Details</string>
+    <string name="id_text_placeholder">Id: N/A</string>
+    <string name="title_placeholder">Title: N/A</string>
+    <string name="body_placeholder">Body: N/A</string>
+    <string name="info_to_get_post">Click on GET DETAILS button to view the post</string>
+</resources>
