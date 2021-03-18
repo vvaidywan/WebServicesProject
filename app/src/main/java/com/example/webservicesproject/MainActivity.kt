@@ -1,9 +1,11 @@
 package com.example.webservicesproject
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import com.example.webservicesproject.models.DataModel
@@ -18,6 +20,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val btnNext = findViewById<Button>(R.id.btnNext)
+        btnNext.setOnClickListener {
+            val intent = Intent(this@MainActivity, RetrofitActivity::class.java)
+            startActivity(intent)
+        }
 
         createProgressDialog()
 
@@ -44,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         val call = ApiClient.getClient.getPost(postID)
         call.enqueue(object : retrofit2.Callback<List<DataModel>> {
             override fun onFailure(call: retrofit2.Call<List<DataModel>>, t: Throwable) {
-                Log.i("MainActivity", "Error is ${t.localizedMessage}")
                 Toast.makeText(this@MainActivity, "There is some error while getting post", Toast.LENGTH_SHORT).show()
                 progressDialog.dismiss()
             }
@@ -54,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                     response: Response<List<DataModel>>
             ) {
                 progressDialog.dismiss()
-                Log.i("MainActivity", "Data is ${response.body()}")
                 for (data in response.body()!!) {
                     //println("Data is ${data.postID}, ${data.postTitle}, ${data.postBody}")
                     id_TV.text = "Post Id: ${data.postID.toString()}"
